@@ -7,10 +7,10 @@ A Claude Code skill with a warm-parchment + ink-blue + serif skin, focused on on
 ## What it does
 
 1. **Read style** — Load color and font tokens from `[references/style.md](references/style.md)` (user-editable).
-2. **Analyze** — Read the text. Decide which diagrams best illustrate the structural claims — let the source's structure dictate the count (1 for a short note, 10+ for a long paper or design spec). Pick from 17 types.
+2. **Analyze** — Read the text, detect whether the source is markdown or plain text, then decide which diagrams best illustrate the structural claims — let the source's structure dictate the count (1 for a short note, 10+ for a long paper or design spec). Pick from 17 types. For markdown sources, also pick an **anchor** for each figure so it can be inserted at the right spot.
 3. **Render** — For each, fill the matching template into an `<svg>` block, applying the style tokens.
 4. **Assemble** — Stitch the SVGs into one HTML page with a title, rationale, and per-diagram captions.
-5. **Export** — Also write each diagram as a standalone `.svg` file. Optional shell helper converts to PNG.
+5. **Export** — Always write three artifacts: the combined HTML page, a per-figure `.svg` for each diagram, and an `output.md` file. For markdown sources `output.md` is the original prose verbatim with figure references inserted at the planned anchors; for plain-text sources it's a synthesized markdown stack mirroring the HTML page. Optional shell helper converts SVGs to PNG.
 
 ## The 17 diagram types
 
@@ -58,7 +58,7 @@ Trigger phrases (Chinese / English):
 
 | You say | What Claude does |
 | --- | --- |
-| 把这段文字画成图 + 文本 | Read whole text → pick the right diagrams (count driven by source) → fill templates → assemble single HTML + per-figure SVG |
+| 把这段文字画成图 + 文本 | Read whole text → detect markdown vs plain text → pick the right diagrams (count driven by source) → fill templates → assemble HTML + per-figure SVG + markdown |
 | 给这段话配图 | Same |
 | 文本转图表 | Same |
 | visualize this: + text | Same |
@@ -66,9 +66,13 @@ Trigger phrases (Chinese / English):
 
 Or invoke directly: `/text-to-diagrams` followed by the text.
 
-To save the result to disk, add `"写到 output.html"` / `"save to output.html"` to your prompt. Per-figure SVGs land in `output/figure-N-<type>.svg` next to the HTML.
+To save the result to disk, add `"写到 output.html"` / `"save to output.html"` to your prompt. Three artifacts land next to each other:
 
-To skip per-figure SVGs: `"only the page, no individual SVGs"`.
+- `output.html` — combined page with inline SVGs.
+- `output.md` — for markdown sources, the original prose verbatim with `![](output/figure-N-*.svg)` references inserted at planned anchors; for plain-text sources, a synthesized markdown stack. Drop straight into Obsidian, GitHub, MkDocs, etc.
+- `output/figure-N-<type>.svg` — one standalone SVG per figure, referenced by both of the above.
+
+To skip per-figure SVGs (and the markdown file, which would have nothing to reference): `"only the page, no individual SVGs"`.
 
 ## Customizing the look
 
