@@ -5,10 +5,6 @@ document. All wear the same skin defined in [`style.md`](style.md) — warm
 parchment canvas (`#f5f4ed`), ink-blue focal accent (`#1B365D`), neutral warm
 grays. Edit `style.md` to retheme every template at once.
 
-Catalog roots:
-- 14 types inherited from [kami](https://github.com/tw93/kami)
-- 3 engineering types (sequence, ER, pyramid) ported from [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design)
-
 ---
 
 ## 1. Selection table
@@ -204,9 +200,10 @@ position labels to disambiguate.
 
 ---
 
-## 7. Engineering-diagram conventions (sequence / ER / pyramid)
+## 7. Type-specific conventions (sequence / ER / pyramid)
 
-Ported from diagram-design — the three types kami didn't cover.
+These three types have stricter conventions than the rest of the catalog —
+they encode time, data shape, and rank, so layout choices carry meaning.
 
 ### Sequence
 
@@ -267,7 +264,7 @@ Every template has this skeleton:
 ```html
 <!DOCTYPE html>
 <html><head>
-  <style>/* kami palette tokens, body styling, typography */</style>
+  <style>/* palette tokens, body styling, typography */</style>
 </head><body>
   <div class="frame">
     <p class="eyebrow">Diagram type · label</p>
@@ -286,18 +283,4 @@ Every template has this skeleton:
 
 When embedding multiple diagrams in one page, extract only the `<svg>…</svg>`
 block plus the surrounding `<div class="frame">`, drop into a parent HTML page
-that imports the kami palette CSS once.
-
----
-
-## 9. Credit
-
-- **kami** by tw93 — base catalog, selection logic, anti-pattern table, design
-  tokens, financial chart conventions (candlestick / waterfall / donut / bar /
-  line) and 9 of the structural diagrams (architecture, flowchart, quadrant,
-  state-machine, timeline, swimlane, tree, layer-stack, venn).
-- **diagram-design** by Cathryn Lavery — the engineering trio (sequence, ER,
-  pyramid) ported and reskinned to the kami palette.
-- **text-to-diagrams** adds the multi-diagram-from-one-text workflow, the
-  user-editable [`style.md`](style.md) source of truth, and the single-page
-  assembler.
+that imports the palette CSS once.

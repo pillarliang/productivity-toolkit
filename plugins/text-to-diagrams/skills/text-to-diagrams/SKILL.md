@@ -1,13 +1,13 @@
 ---
 name: text-to-diagrams
-description: Given a text, analyze its content and generate one or more kami-style diagrams (HTML + inline SVG) into a single HTML page plus per-figure SVG files. Triggers on "把这段文字画成图 / 给这段话配图 / 文本转图表 / 帮我把这段内容做成图 / make diagrams from this text / visualize this".
+description: Given a text, analyze its content and generate one or more structured diagrams (HTML + inline SVG) into a single HTML page plus per-figure SVG files. Triggers on "把这段文字画成图 / 给这段话配图 / 文本转图表 / 帮我把这段内容做成图 / make diagrams from this text / visualize this".
 ---
 
 # text-to-diagrams
 
 Given a text, pick the right diagram(s) from a fixed catalog of 17 types and emit one HTML page with all of them embedded — plus a standalone `.svg` for each figure so the user can drop individual diagrams into other docs.
 
-Inherited skin from [kami](https://github.com/tw93/kami) — warm parchment + ink-blue accent + serif hierarchy. Engineering trio (sequence / ER / pyramid) ported from [diagram-design](https://github.com/cathrynlavery/diagram-design). Edit [`references/style.md`](references/style.md) to retheme everything.
+Default skin: warm parchment + ink-blue accent + serif hierarchy. Edit [`references/style.md`](references/style.md) to retheme everything.
 
 ## When to use
 
@@ -17,9 +17,8 @@ Inherited skin from [kami](https://github.com/tw93/kami) — warm parchment + in
 
 When **not** to use:
 
-- User wants a single specific diagram and supplies the data → use kami's diagram skill directly.
 - User wants prose, not structure → don't draw.
-- User wants slides or a long-doc → use `kami`. This skill is for diagrams only.
+- User wants slides or a long-form document → this skill is for diagrams only.
 
 ## Step 0 · Read the style file
 

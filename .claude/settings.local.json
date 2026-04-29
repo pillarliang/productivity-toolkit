@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git config *)"
+      "Bash(git config *)",
+      "Bash(npx skills *)",
+      "Bash(ln -s /Users/liangzhu/Documents/dev/productivity-toolkit/plugins/text-to-diagrams/skills/text-to-diagrams ~/.claude/skills/text-to-diagrams)"
     ]
   }
 }

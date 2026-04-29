@@ -2,7 +2,7 @@
 
 > Given a text, pick the right diagrams from a fixed catalog of 17 types and emit one HTML page with all of them embedded — plus a standalone SVG for each figure.
 
-A Claude Code skill. Skin inherited from [kami](https://github.com/tw93/kami) (warm parchment + ink-blue accent + serif hierarchy). Engineering trio (sequence / ER / pyramid) ported from [diagram-design](https://github.com/cathrynlavery/diagram-design). Carved out as a standalone skill focused on one job: **text in, diagrams out**.
+A Claude Code skill with a warm-parchment + ink-blue + serif skin, focused on one job: **text in, diagrams out**.
 
 ## What it does
 
@@ -14,32 +14,25 @@ A Claude Code skill. Skin inherited from [kami](https://github.com/tw93/kami) (w
 
 ## The 17 diagram types
 
-Inherited from kami (14):
-
-| Type          | When                            |
-| ------------- | ------------------------------- |
-| Architecture  | System components + connections |
-| Flowchart     | Decision branches               |
-| Quadrant      | Two-axis positioning            |
-| Bar chart     | Category comparison             |
-| Line chart    | Trend over time                 |
-| Donut chart   | Proportional breakdown          |
-| State machine | Finite states + transitions     |
-| Timeline      | Time axis + milestones          |
-| Swimlane      | Cross-role process              |
-| Tree          | Hierarchy                       |
-| Layer stack   | Stacked layers (OSI etc.)       |
-| Venn          | Set intersections               |
-| Candlestick   | OHLC price action               |
-| Waterfall     | Value decomposition             |
-
-Ported from diagram-design (3):
-
 | Type            | When                                                       |
 | --------------- | ---------------------------------------------------------- |
+| Architecture    | System components + connections                            |
+| Flowchart       | Decision branches                                          |
 | Sequence        | Time-ordered messages between actors (API call, RPC chain) |
 | ER / data model | Database tables, entities, foreign keys                    |
+| Quadrant        | Two-axis positioning                                       |
 | Pyramid         | Ranked hierarchy / value pyramid / conversion funnel       |
+| Bar chart       | Category comparison                                        |
+| Line chart      | Trend over time                                            |
+| Donut chart     | Proportional breakdown                                     |
+| State machine   | Finite states + transitions                                |
+| Timeline        | Time axis + milestones                                     |
+| Swimlane        | Cross-role process                                         |
+| Tree            | Hierarchy                                                  |
+| Layer stack     | Stacked layers (OSI etc.)                                  |
+| Venn            | Set intersections                                          |
+| Candlestick     | OHLC price action                                          |
+| Waterfall       | Value decomposition                                        |
 
 Full selection logic, color tokens, type-specific conventions, and anti-patterns in `[references/diagrams.md](references/diagrams.md)`.
 
@@ -86,7 +79,7 @@ Two quick recipes inside `style.md`:
 - Switch accent from ink-blue to terracotta
 - Map onto a sans-serif corporate brand
 
-The skill checks contrast (WCAG AA), refuses pure-white paper, and rejects a second accent — same constraints diagram-design's onboarding uses, just driven by a file edit instead of website scraping.
+The skill checks contrast (WCAG AA), refuses pure-white paper, and rejects a second accent — all driven by a file edit, no code changes needed.
 
 For multiple skins, copy `style.md` to `references/style-<name>.md` and tell the skill `"use style-<name>.md for this run"`.
 
@@ -130,14 +123,14 @@ text-to-diagrams/
 
 ## Design constraints
 
-From kami:
+Global rules:
 
 - **Coordinates divisible by 4** — anti-AI-slop floor.
 - **Focal rule** — at most 2 elements wear the brand-tint + brand-stroke. Everything else neutral.
 - **Content drives diagram count** — no fixed cap. A short note: 1 diagram. A long technical paper or design spec: 10+. Mitigate template-feel on long pages by grouping diagrams under section headings, not by capping count.
 - **One accent color** — no warning amber, no success green. Use shape, position, or label to differentiate states.
 
-From diagram-design:
+Type-specific:
 
 - **Sequence**: time runs top→down only; activation bars on lifelines; one focal actor.
 - **ER**: aggregate root wears the accent; join tables get a dashed border.
@@ -145,4 +138,4 @@ From diagram-design:
 
 ## License
 
-MIT. Templates and design language inherited from [kami](https://github.com/tw93/kami) (MIT) and [diagram-design](https://github.com/cathrynlavery/diagram-design) (MIT).
+MIT. Templates and design language adapted from [kami](https://github.com/tw93/kami) (MIT) and [diagram-design](https://github.com/cathrynlavery/diagram-design) (MIT).

@@ -86,7 +86,7 @@ When reading this file the skill verifies:
 - **`brand` is the most saturated color** in the table. If you set `brand` to a near-grey (e.g. `#666`), the focal signal disappears and the skill will warn you.
 - **`paper` is not pure white** (`#ffffff`). Pure white turns the design sterile. Use a cream, bone, or warm grey. If you really want pure white, override this file's check with a comment line: `<!-- paper: pure-white intentional -->`.
 - **`ink` (near-black) on `paper` ≥ 4.5:1 contrast.** WCAG AA. The skill will warn if the values fail.
-- **No second accent.** This system uses one focal color. If you want to add `accent-warning` or `accent-success`, the answer is no — diagram-design and kami both deliberately ship a single accent. Use shape, position, or label to differentiate states instead.
+- **No second accent.** This system uses one focal color. If you want to add `accent-warning` or `accent-success`, the answer is no — the design deliberately ships a single accent. Use shape, position, or label to differentiate states instead.
 
 ---
 
