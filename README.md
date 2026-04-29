@@ -59,6 +59,21 @@ In Claude Code, run once:
 }
 ```
 
+### Alternative: install as standalone skills via `npx skills`
+
+If you want the skills (just the `SKILL.md` and its references) without the Claude Code plugin wrapper — useful when sharing with other agents like Cursor — use the [skills](https://skills.sh/) CLI:
+
+```bash
+# Both skills, installed globally
+npx skills add pillarliang/productivity-toolkit -g
+
+# Just one
+npx skills add pillarliang/productivity-toolkit -g --skill python-code-style
+npx skills add pillarliang/productivity-toolkit -g --skill text-to-diagrams
+```
+
+Drop `-g` to install into the current project instead. Verify with `npx skills ls -g`.
+
 ### Alternative: manual
 
 ```bash

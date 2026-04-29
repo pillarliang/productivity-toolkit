@@ -1,176 +1,189 @@
-> ⚠️ This translation is out of date — repo was restructured in v2.0.0. See [English README](../README.md) or [中文简体](README.zh-cn.md) for the current layout and install instructions.
-
-# Python 코드 스타일 플러그인
+# Productivity Toolkit
 
 🌍 **언어**: [English](../README.md) | [中文简体](README.zh-cn.md) | [繁體中文](README.zh-tw.md) | [Deutsch](README.de.md) | [Français](README.fr.md) | [Italiano](README.it.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Português](README.pt.md) | [Español](README.es.md)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-Plugin-blue.svg)](https://code.claude.com/docs/en/plugins)
+[![Claude Code Marketplace](https://img.shields.io/badge/Claude%20Code-Marketplace-blue.svg)](https://code.claude.com/docs/en/plugins)
 
-모든 Python 코드 생성에 전문적인 Python 스타일 가이드라인을 적용하는 Claude Code 플러그인입니다.
+생산성 플러그인을 모아둔 Claude Code 마켓플레이스. 하나의 저장소, 여러 플러그인 — 필요한 것만 설치하세요.
 
-## 기능
+## 구성
 
-- **자동 활성화**: Claude가 코드를 생성하거나 검토할 때 Python 스타일 가이드라인을 자동으로 적용
-- **코드 리뷰 지원**: 상세한 피드백과 점수로 기존 Python 코드 검토
-- **포괄적인 범위**: 업계 표준 모범 사례 포함
-  - 명명 규칙 (모듈, 클래스, 함수, 변수, 상수)
-  - Args, Returns, Raises, Yields 섹션이 포함된 docstring 형식
-  - import 규칙 및 순서
-  - 포맷팅 표준 (들여쓰기, 줄 길이, 공백)
-  - 언어 규칙 (예외, 타입 힌트, 컴프리헨션)
-- **상세한 참조**: 엣지 케이스를 위한 지원 문서
+| 플러그인 | 역할 | 설치 |
+| --- | --- | --- |
+| **[python-code-style](../plugins/python-code-style/)** | Python 코드 생성 시 전문적인 스타일 가이드를 강제하고, 구조화된 코드 리뷰를 지원합니다. 명명 규칙, docstring 형식, import 정렬, PEP 8 / Google styleguide 규칙. | `/plugin install python-code-style@productivity-toolkit` |
+| **[text-to-diagrams](../plugins/text-to-diagrams/)** | 17가지 다이어그램(아키텍처, 플로우차트, 시퀀스, ER, 피라미드, 도넛…)에서 자동 선택하여 원본 텍스트를 단일 HTML 페이지의 다이어그램 + 독립 SVG로 변환합니다. Kami 스타일. | `/plugin install text-to-diagrams@productivity-toolkit` |
+
+각 플러그인은 자체 완결적입니다 — 자체 `plugin.json`, 자체 `SKILL.md`, 자체 references와 assets를 가집니다. 마켓플레이스는 그것들을 나열할 뿐입니다.
 
 ## 설치
 
-### 방법 1: Marketplace를 통해 (권장)
+### 1. 마켓플레이스 추가
 
-Claude Code에서 실행:
+Claude Code에서 한 번만 실행:
 
 ```bash
-# 단계 1: marketplace 추가
-/plugin marketplace add pillarliang/python-code-style
-
-# 단계 2: 플러그인 설치
-/plugin install python-code-style
+/plugin marketplace add pillarliang/productivity-toolkit
 ```
 
-### 방법 2: settings.json을 통해
+### 2. 원하는 플러그인 설치
 
-`~/.claude/settings.json`에 추가:
+```bash
+# Python 스타일만
+/plugin install python-code-style@productivity-toolkit
+
+# 다이어그램만
+/plugin install text-to-diagrams@productivity-toolkit
+
+# 둘 다
+/plugin install python-code-style@productivity-toolkit
+/plugin install text-to-diagrams@productivity-toolkit
+```
+
+### 대안: settings.json에 선언
 
 ```json
 {
   "extraKnownMarketplaces": {
-    "python-code-style": {
+    "productivity-toolkit": {
       "source": {
         "source": "github",
-        "repo": "pillarliang/python-code-style"
+        "repo": "pillarliang/productivity-toolkit"
       }
     }
   },
   "enabledPlugins": {
-    "python-code-style@python-code-style": true
+    "python-code-style@productivity-toolkit": true,
+    "text-to-diagrams@productivity-toolkit": true
   }
 }
 ```
 
-### 방법 3: 수동 설치
+### 대안: `npx skills`로 독립 Skill로 설치
+
+Claude Code 플러그인 래퍼 없이 Skill 본체(`SKILL.md`와 references)만 원한다면 — 예를 들어 Cursor 같은 다른 에이전트와 공유하려면 — [skills](https://skills.sh/) CLI를 사용하세요:
 
 ```bash
-# 저장소 복제
-git clone https://github.com/pillarliang/python-code-style.git
+# 두 Skill 모두 글로벌로 설치
+npx skills add pillarliang/productivity-toolkit -g
 
-# Claude 플러그인 디렉토리에 복사
-cp -r python-code-style ~/.claude/plugins/python-code-style
+# 하나만 설치
+npx skills add pillarliang/productivity-toolkit -g --skill python-code-style
+npx skills add pillarliang/productivity-toolkit -g --skill text-to-diagrams
 ```
 
-### 설치 확인
+`-g`를 생략하면 현재 프로젝트에 설치됩니다. `npx skills ls -g`로 확인하세요.
 
-Claude Code에서 `/plugin` 또는 `/plugin list`를 실행하여 설치를 확인하세요.
+### 대안: 수동 설치
 
-### 플러그인 업데이트
+```bash
+git clone https://github.com/pillarliang/productivity-toolkit.git
+cp -r productivity-toolkit/plugins/python-code-style ~/.claude/plugins/
+cp -r productivity-toolkit/plugins/text-to-diagrams ~/.claude/plugins/
+```
 
-**수동 업데이트:**
+### 검증
 
-1. marketplace 플러그인 목록을 업데이트한 후 재설치:
-   ```bash
-   /plugin marketplace update pillarliang/python-code-style
-   ```
+Claude Code에서 `/plugin` 또는 `/plugin list`를 실행하여 플러그인이 설치되었는지 확인합니다.
 
-2. 또는 대화형 UI를 통해: `/plugin`을 실행하고 **Marketplaces** 탭으로 전환한 다음 marketplace를 선택하고 **Update**를 선택합니다.
+## 업데이트
+
+**수동:**
+
+```bash
+/plugin marketplace update pillarliang/productivity-toolkit
+```
+
+또는 UI에서: `/plugin` → **Marketplaces** 탭 → 마켓플레이스 선택 → **Update**.
 
 **자동 업데이트:**
 
-Claude Code는 시작 시 marketplace 및 설치된 플러그인의 자동 업데이트를 지원합니다:
+1. `/plugin` 실행
+2. **Marketplaces** 탭
+3. 대상 마켓플레이스 선택
+4. **Enable auto-update**
 
-1. `/plugin`을 실행하여 플러그인 관리자 열기
-2. **Marketplaces** 탭 선택
-3. 대상 marketplace 선택
-4. **Enable auto-update** 선택
+> 서드파티 마켓플레이스는 자동 업데이트가 기본 비활성화되어 있습니다. 한 번 활성화하면 Claude Code가 시작 시 새로 고칩니다.
 
-> **참고:** 공식 Anthropic marketplace는 기본적으로 자동 업데이트가 활성화되어 있습니다. 타사 및 로컬 개발 marketplace는 기본적으로 비활성화되어 있습니다.
+## 제거
 
-## 사용법
+```bash
+/plugin uninstall python-code-style@productivity-toolkit
+/plugin uninstall text-to-diagrams@productivity-toolkit
 
-설치 후, Claude에게 다음을 요청하면 플러그인이 자동으로 활성화됩니다:
-
-- Python 코드 작성
-- Python 스크립트 또는 모듈 생성
-- Python 코드 리팩토링
-- Python 함수 또는 클래스 생성
-- **기존 Python 코드 검토**
-
-### 프롬프트 예시
-
-**코드 생성:**
-```
-"JSON 파일을 파싱하는 Python 함수를 작성해줘"
-
-"데이터베이스 연결을 위한 Python 클래스를 만들어줘"
-
-"이 Python 코드를 더 깔끔하게 리팩토링해줘"
+# 또는 마켓플레이스 전체 제거(해당 마켓플레이스의 모든 플러그인 제거됨)
+/plugin marketplace remove pillarliang/productivity-toolkit
 ```
 
-**코드 리뷰:**
+## 저장소 구조
+
+```text
+productivity-toolkit/
+├── .claude-plugin/
+│   └── marketplace.json              # 두 플러그인을 나열
+├── plugins/
+│   ├── python-code-style/
+│   │   ├── .claude-plugin/plugin.json
+│   │   └── skills/python-code-style/
+│   │       ├── SKILL.md
+│   │       └── references/           # docstrings, naming, language, style rules
+│   └── text-to-diagrams/
+│       ├── .claude-plugin/plugin.json
+│       └── skills/text-to-diagrams/
+│           ├── SKILL.md
+│           ├── README.md             # Skill 자체 문서
+│           ├── templates/            # 17가지 다이어그램 HTML 템플릿
+│           ├── references/           # style.md, diagrams.md, page-shell.html
+│           ├── tools/svg-to-png.sh   # 선택적 SVG→PNG 변환기
+│           └── examples/             # 샘플 입력 + 렌더링 결과
+├── docs/                             # 다국어 README
+├── LICENSE
+└── README.md                         # 이 파일
 ```
-"이 Python 파일을 검토해줘: /path/to/file.py"
 
-"이 Python 코드의 스타일 문제를 확인해줘"
-```
+> **왜 이 구조인가?** 각 `plugins/<name>/` 폴더는 그 자체로 완전한 플러그인입니다(자체 `plugin.json`과 `skills/` 보유). 최상위 `marketplace.json`은 단지 그것들을 `source` 경로로 나열할 뿐입니다. 세 번째 플러그인을 추가하려면 = `plugins/` 아래에 새 폴더를 두고 `marketplace.json`에 항목 하나 추가하면 끝. 플러그인 간 결합 없음.
 
-Claude는 다음을 포함한 Python 스타일 가이드 규칙을 자동으로 적용합니다:
+## 이 마켓플레이스에 새 플러그인 추가하기
 
-- 적절한 명명 규칙 (함수는 `snake_case`, 클래스는 `CapWords`)
-- Args, Returns, Raises 섹션이 포함된 docstring
-- 올바른 import 순서 (표준 라이브러리 → 서드파티 → 로컬)
-- 4칸 들여쓰기 및 80자 줄 제한
-- 함수 시그니처의 타입 힌트
+1. `plugins/<your-plugin>/.claude-plugin/plugin.json` 생성
+2. `plugins/<your-plugin>/skills/<your-skill>/SKILL.md` 추가(frontmatter에 `name` + `description` 필수)
+3. Skill에 필요한 보조 파일(references/, templates/ 등) 추가
+4. `.claude-plugin/marketplace.json`의 `plugins[]`에 `source: "./plugins/<your-plugin>"`로 새 항목 추가
+5. 마켓플레이스의 `version` 필드를 증가
 
-### 코드 리뷰 출력 예시
-
-코드 검토 시, Claude는 구조화된 피드백을 제공합니다:
-
-```markdown
-## 코드 리뷰 요약
-
-### ✅ 좋은 점
-- snake_case를 사용한 명확한 함수 명명
-- 타입 힌트의 적절한 사용
-
-### ⚠️ 발견된 문제
-
-#### 문제 1: 문서화 - docstring 누락
-- **위치**: 5번째 줄
-- **문제**: 함수 `process_data`에 docstring이 없습니다
-- **제안**: Args/Returns/Raises 섹션이 포함된 docstring 추가
-
-#### 문제 2: 스타일 - 가변 기본 인수
-- **위치**: 10번째 줄
-- **문제**: `def func(items=[])`가 가변 기본값을 사용합니다
-- **제안**: `items=None`을 사용하고 함수 내부에서 초기화
-
-### 📊 전체 평가
-- 스타일 준수: 7/10
-- 문서화: 5/10
-- 코드 품질: 8/10
-```
+끝. 글루 코드도 등록 단계도 없습니다.
 
 ## 호환성
 
 - **Claude Code**: v1.0.0+
 - **Cowork 모드**: 완전 지원
-- **Python 버전**: Python 3.8+ 에 적용
-
-## 스타일 가이드 출처
-
-이 플러그인은 다음을 포함한 널리 채택된 Python 스타일 규칙을 기반으로 합니다:
-
-- [PEP 8 – Python 코드 스타일 가이드](https://peps.python.org/pep-0008/)
-- [PEP 257 – Docstring 규칙](https://peps.python.org/pep-0257/)
-- [PEP 484 – 타입 힌트](https://peps.python.org/pep-0484/)
-- [Google Python 스타일 가이드](https://google.github.io/styleguide/pyguide.html)
+- 각 플러그인의 호환성은 자체 폴더에 문서화
 
 ## 라이선스
 
-이 플러그인은 [MIT 라이선스](https://opensource.org/licenses/MIT) 하에 배포됩니다.
+[MIT](../LICENSE).
+
+## 기여
+
+1. 저장소를 fork
+2. feature 브랜치 생성 (`git checkout -b feature/<name>`)
+3. `plugins/<name>/`의 기존 플러그인을 개선하거나 새 플러그인 추가(위의 "새 플러그인 추가하기" 참조)
+4. PR을 엽니다
+
+## 변경 이력
+
+### v2.0.0
+
+- **저장소 재구조화**: `python-code-style`에서 `productivity-toolkit`로 이름 변경; 단일 플러그인에서 멀티 플러그인 마켓플레이스로 전환
+- **새 플러그인**: `text-to-diagrams` — 17가지 다이어그램 생성기(아키텍처, 플로우, 시퀀스, ER, 피라미드, 도넛…), HTML 한 페이지 + 도형별 SVG 생성
+- `python-code-style`이 `plugins/python-code-style/`로 이전(기능 변화 없음; 설치 명령은 namespace 형식으로 업데이트)
+
+### v1.1.0 (python-code-style)
+
+- 상세한 피드백과 점수가 있는 코드 리뷰 지원 추가
+- 다국어 README 지원(10개 언어) 추가
+- Skill 트리거 조건 개선
+
+### v1.0.0 (python-code-style)
+
+- 초기 릴리스

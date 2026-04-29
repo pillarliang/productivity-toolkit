@@ -59,6 +59,21 @@
 }
 ```
 
+### 备选:通过 `npx skills` 作为独立 skill 安装
+
+如果只想要 skill 本身(`SKILL.md` 及其引用文件),不需要 Claude Code 插件包装——比如要分享给 Cursor 等其他 agent——可以用 [skills](https://skills.sh/) CLI:
+
+```bash
+# 全局安装两个 skill
+npx skills add pillarliang/productivity-toolkit -g
+
+# 只装其中一个
+npx skills add pillarliang/productivity-toolkit -g --skill python-code-style
+npx skills add pillarliang/productivity-toolkit -g --skill text-to-diagrams
+```
+
+去掉 `-g` 则装到当前项目。用 `npx skills ls -g` 验证。
+
 ### 备选:手动安装
 
 ```bash
