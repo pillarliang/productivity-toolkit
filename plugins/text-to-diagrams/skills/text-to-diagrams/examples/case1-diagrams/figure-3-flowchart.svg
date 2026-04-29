@@ -1,0 +1,84 @@
+<svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow-flow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#504e49"/>
+    </marker>
+    <marker id="arrow-flow-brand" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1B365D"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#f5f4ed"/>
+
+  <!-- ===== Flow ===== -->
+  <!-- Start → Step -->
+  <line x1="430" y1="72" x2="430" y2="112" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-flow)"/>
+  <!-- Step → Decision -->
+  <line x1="430" y1="176" x2="430" y2="216" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-flow)"/>
+
+  <!-- Decision YES → Outcome A (native, secondary path) -->
+  <path d="M 360 268 L 200 268 L 200 332" fill="none" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-flow)"/>
+  <rect x="170" y="284" width="34" height="14" rx="2" fill="#f5f4ed"/>
+  <text x="187" y="294" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.12em">YES</text>
+
+  <!-- Decision NO → Outcome B (customize, focal/primary path) -->
+  <path d="M 500 268 L 660 268 L 660 332" fill="none" stroke="#1B365D" stroke-width="1.4" marker-end="url(#arrow-flow-brand)"/>
+  <rect x="636" y="284" width="30" height="14" rx="2" fill="#f5f4ed"/>
+  <text x="651" y="294" fill="#1B365D" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.12em">NO</text>
+
+  <!-- Outcome A → End -->
+  <path d="M 200 396 L 200 440 L 396 440" fill="none" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-flow)"/>
+  <!-- Outcome B → End -->
+  <path d="M 660 396 L 660 440 L 464 440" fill="none" stroke="#1B365D" stroke-width="1.4" marker-end="url(#arrow-flow-brand)"/>
+
+  <!-- ===== Nodes ===== -->
+
+  <!-- Start (pill) -->
+  <rect x="340" y="40" width="180" height="32" rx="16" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+  <text x="430" y="60" fill="#141413" font-size="11" font-family="inherit" text-anchor="middle">新场景需求到达</text>
+
+  <!-- Step: list required services -->
+  <rect x="350" y="112" width="160" height="64" rx="6" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+  <text x="364" y="130" fill="#504e49" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">STEP 01</text>
+  <text x="430" y="150" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">列出所需 service / tools</text>
+  <text x="430" y="166" fill="#504e49" font-size="9" font-family="inherit" text-anchor="middle">梳理工具与编排需求</text>
+
+  <!-- Decision diamond (FOCAL) -->
+  <polygon points="430,216 500,242 500,268 430,320 360,268 360,242"
+           fill="#EEF2F7" stroke="#1B365D" stroke-width="1.2"/>
+  <text x="430" y="260" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">模型能自主调用 tools</text>
+  <text x="430" y="275" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">且无需编排链路？</text>
+  <text x="430" y="294" fill="#1B365D" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.15em">DECISION</text>
+
+  <!-- Outcome A: Native worker -->
+  <rect x="120" y="332" width="160" height="64" rx="6" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+  <text x="134" y="350" fill="#504e49" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">OUTCOME A</text>
+  <text x="200" y="370" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">原生 Worker + Tools</text>
+  <text x="200" y="386" fill="#504e49" font-size="9" font-family="inherit" text-anchor="middle">不定制 · 沿用框架</text>
+
+  <!-- Outcome B: Customize (focal) -->
+  <rect x="580" y="332" width="160" height="64" rx="6" fill="#EEF2F7" stroke="#1B365D" stroke-width="1.2"/>
+  <text x="594" y="350" fill="#1B365D" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">OUTCOME B · FOCAL</text>
+  <text x="660" y="370" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">定制 Worker Agent</text>
+  <text x="660" y="386" fill="#1B365D" font-size="9" font-family="inherit" text-anchor="middle">优先质量 · 后续降本</text>
+
+  <!-- End (pill) -->
+  <rect x="340" y="424" width="180" height="32" rx="16" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+  <text x="430" y="444" fill="#141413" font-size="11" font-family="inherit" text-anchor="middle">交付到 Master Agent</text>
+
+  <!-- Legend -->
+  <line x1="40" y1="484" x2="820" y2="484" stroke="rgba(20,20,19,0.10)" stroke-width="0.8"/>
+  <text x="40" y="500" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" letter-spacing="0.22em">LEGEND</text>
+
+  <polygon points="180,492 192,498 180,504 168,498" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+  <text x="202" y="502" fill="#504e49" font-size="8.5" font-family="inherit">Focal · decision &amp; primary path</text>
+
+  <rect x="400" y="494" width="14" height="10" rx="2" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+  <text x="420" y="502" fill="#504e49" font-size="8.5" font-family="inherit">Step · outcome</text>
+
+  <rect x="540" y="494" width="14" height="10" rx="16" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+  <text x="560" y="502" fill="#504e49" font-size="8.5" font-family="inherit">Start · end</text>
+
+  <line x1="660" y1="500" x2="690" y2="500" stroke="#1B365D" stroke-width="1.4" marker-end="url(#arrow-flow-brand)"/>
+  <text x="698" y="502" fill="#504e49" font-size="8.5" font-family="inherit">Customize path</text>
+</svg>

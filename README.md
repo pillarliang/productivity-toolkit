@@ -1,316 +1,174 @@
-# Python Code Style Plugin
+# Productivity Toolkit
 
 **Language / 语言**: [English](README.md) | [中文简体](docs/README.zh-cn.md) | [繁體中文](docs/README.zh-tw.md) | [Deutsch](docs/README.de.md) | [Français](docs/README.fr.md) | [Italiano](docs/README.it.md) | [日本語](docs/README.ja.md) | [한국어](docs/README.ko.md) | [Português](docs/README.pt.md) | [Español](docs/README.es.md)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-Plugin-blue.svg)](https://code.claude.com/docs/en/plugins)
+[![Claude Code Marketplace](https://img.shields.io/badge/Claude%20Code-Marketplace-blue.svg)](https://code.claude.com/docs/en/plugins)
 
-A Claude Code plugin that enforces professional Python style guidelines for all Python code generation.
+A Claude Code marketplace bundling productivity plugins. One repo, multiple plugins — install only the ones you need.
 
-## Features
+## What's inside
 
-- **Automatic Activation**: Claude automatically follows Python style guidelines when generating or reviewing code
-- **Code Review Support**: Review existing Python code with detailed feedback and scoring
-- **Comprehensive Coverage**: Includes industry-standard best practices
-  - Naming conventions (modules, classes, functions, variables, constants)
-  - Docstring format with Args, Returns, Raises, Yields sections
-  - Import rules and ordering
-  - Formatting standards (indentation, line length, whitespace)
-  - Language rules (exceptions, type hints, comprehensions)
-- **Detailed References**: Supporting documentation for edge cases
+| Plugin | What it does | Install |
+| --- | --- | --- |
+| **[python-code-style](plugins/python-code-style/)** | Enforces professional Python style guidelines on code generation and powers structured code reviews. Naming conventions, docstring formats, import order, PEP 8 / Google styleguide rules. | `/plugin install python-code-style@productivity-toolkit` |
+| **[text-to-diagrams](plugins/text-to-diagrams/)** | Picks from 17 diagram types (architecture, flowchart, sequence, ER, pyramid, donut, …) and turns raw text into a single HTML page of diagrams plus standalone SVGs. Kami-style. | `/plugin install text-to-diagrams@productivity-toolkit` |
 
-## Installation
+Each plugin is self-contained — its own `plugin.json`, its own `SKILL.md`, its own references and assets. The marketplace just lists them.
 
-### Method 1: Via Marketplace (Recommended)
+## Install
 
-In Claude Code, run:
+### 1. Add the marketplace
+
+In Claude Code, run once:
 
 ```bash
-# Step 1: Add the marketplace
-/plugin marketplace add pillarliang/python-code-style
-
-# Step 2: Install the plugin
-/plugin install python-code-style
+/plugin marketplace add pillarliang/productivity-toolkit
 ```
 
-### Method 2: Via settings.json
+### 2. Install the plugins you want
 
-Add to your `~/.claude/settings.json`:
+```bash
+# Just Python style support
+/plugin install python-code-style@productivity-toolkit
+
+# Just diagrams
+/plugin install text-to-diagrams@productivity-toolkit
+
+# Both
+/plugin install python-code-style@productivity-toolkit
+/plugin install text-to-diagrams@productivity-toolkit
+```
+
+### Alternative: declare in settings.json
 
 ```json
 {
   "extraKnownMarketplaces": {
-    "python-code-style": {
+    "productivity-toolkit": {
       "source": {
         "source": "github",
-        "repo": "pillarliang/python-code-style"
+        "repo": "pillarliang/productivity-toolkit"
       }
     }
   },
   "enabledPlugins": {
-    "python-code-style@python-code-style": true
+    "python-code-style@productivity-toolkit": true,
+    "text-to-diagrams@productivity-toolkit": true
   }
 }
 ```
 
-### Method 3: Manual Installation
+### Alternative: manual
 
 ```bash
-# Clone the repository
-git clone https://github.com/pillarliang/python-code-style.git
-
-# Copy to Claude plugins directory
-cp -r python-code-style ~/.claude/plugins/python-code-style
+git clone https://github.com/pillarliang/productivity-toolkit.git
+cp -r productivity-toolkit/plugins/python-code-style ~/.claude/plugins/
+cp -r productivity-toolkit/plugins/text-to-diagrams ~/.claude/plugins/
 ```
 
-### Verify Installation
+### Verify
 
-Run `/plugin` or `/plugin list` in Claude Code to confirm the plugin is installed.
+Run `/plugin` or `/plugin list` in Claude Code to confirm the plugins are installed.
 
-### Update Plugin
+## Update
 
-**Manual Update:**
+**Manual:**
 
-1. Update the marketplace plugin list, then reinstall:
-   ```bash
-   /plugin marketplace update pillarliang/python-code-style
-   ```
+```bash
+/plugin marketplace update pillarliang/productivity-toolkit
+```
 
-2. Or via interactive UI: Run `/plugin`, switch to the **Marketplaces** tab, select the marketplace, then choose **Update**.
+Or via UI: `/plugin` → **Marketplaces** tab → select the marketplace → **Update**.
 
 **Auto-update:**
 
-Claude Code supports automatic updates for marketplaces and installed plugins on startup:
-
-1. Run `/plugin` to open the plugin manager
-2. Select the **Marketplaces** tab
+1. Run `/plugin`
+2. **Marketplaces** tab
 3. Select the target marketplace
-4. Choose **Enable auto-update**
+4. **Enable auto-update**
 
-> **Note:** The official Anthropic marketplace has auto-update enabled by default. Third-party and locally developed marketplaces have it disabled by default.
+> Third-party marketplaces have auto-update disabled by default. Enable it once and Claude Code will refresh on startup.
 
-## Usage
-
-Once installed, the plugin activates automatically whenever you ask Claude to:
-
-- Write Python code
-- Create Python scripts or modules
-- Refactor Python code
-- Generate Python functions or classes
-- **Review existing Python code**
-
-### Example Prompts
-
-**Code Generation:**
-```
-"Write a Python function to parse JSON files"
-
-"Create a Python class for database connections"
-
-"Refactor this Python code to be cleaner"
-```
-
-**Code Review:**
-```
-"Review this Python file: /path/to/file.py"
-
-"Check this Python code for style issues"
-```
-
-Claude will automatically apply Python style guide rules, including:
-
-- Proper naming conventions (`snake_case` for functions, `CapWords` for classes)
-- Docstrings with Args, Returns, Raises sections
-- Correct import ordering (stdlib → third-party → local)
-- 4-space indentation and 80-character line limits
-- Type hints for function signatures
-
-### Example Output
-
-```python
-"""User authentication module.
-
-This module provides utilities for user authentication and session
-management.
-"""
-
-from __future__ import annotations
-
-import hashlib
-import secrets
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from collections.abc import Mapping
-
-# Constants
-DEFAULT_TIMEOUT_SECONDS = 3600
-MAX_LOGIN_ATTEMPTS = 5
-
-
-class AuthenticationError(Exception):
-    """Raised when authentication fails."""
-
-
-def hash_password(password: str, salt: str | None = None) -> tuple[str, str]:
-    """Hash a password with optional salt.
-
-    Args:
-        password: The plaintext password.
-        salt: Optional salt. Generated if not provided.
-
-    Returns:
-        A tuple containing (password_hash, salt).
-
-    Raises:
-        ValueError: If password is empty.
-    """
-    if not password:
-        raise ValueError("Password cannot be empty")
-
-    if salt is None:
-        salt = secrets.token_hex(16)
-
-    salted_password = f"{salt}{password}"
-    password_hash = hashlib.sha256(salted_password.encode()).hexdigest()
-
-    return password_hash, salt
-```
-
-### Code Review Example Output
-
-When reviewing code, Claude provides structured feedback:
-
-```markdown
-## Code Review Summary
-
-### ✅ What's Good
-- Clear function naming using snake_case
-- Good use of type hints
-
-### ⚠️ Issues Found
-
-#### Issue 1: Documentation - Missing docstring
-- **Location**: Line 5
-- **Problem**: Function `process_data` lacks a docstring
-- **Suggestion**: Add docstring with Args/Returns/Raises sections
-
-#### Issue 2: Style - Mutable default argument
-- **Location**: Line 10
-- **Problem**: `def func(items=[])` uses mutable default
-- **Suggestion**: Use `items=None` and initialize inside function
-
-### 📊 Overall Assessment
-- Style Compliance: 7/10
-- Documentation: 5/10
-- Code Quality: 8/10
-```
-
-## Plugin Structure
-
-```
-python-code-style/
-├── .claude-plugin/
-│   └── plugin.json              # Plugin manifest
-├── skills/
-│   └── python-code-style/
-│       ├── SKILL.md             # Core skill definition
-│       └── references/
-│           ├── language-rules.md    # Python language rules
-│           ├── style-rules.md       # Formatting and style rules
-│           ├── naming-conventions.md # Naming convention details
-│           └── docstrings.md        # Docstring format guide
-└── README.md                    # This file
-```
-
-## Skill Contents
-
-### SKILL.md (Core)
-
-Quick reference including:
-- Naming conventions table
-- Essential formatting rules
-- Docstring format template
-- Import order
-- Code generation checklist
-- **Code review checklist** (naming, documentation, style, code quality)
-- **Standardized review output format**
-
-### Reference Files
-
-| File | Content |
-|------|---------|
-| `language-rules.md` | Lint, imports, exceptions, global state, comprehensions, generators, lambda, type annotations |
-| `style-rules.md` | Semicolons, line length, indentation, blank lines, whitespace, comments, strings, logging |
-| `naming-conventions.md` | Complete naming rules with examples for all Python constructs |
-| `docstrings.md` | Full docstring format for modules, classes, functions with Args/Returns/Raises/Yields |
-
-## Customization
-
-### Extending the Plugin
-
-You can customize the plugin by editing files in the `skills/python-code-style/` directory:
-
-1. **Modify rules**: Edit `SKILL.md` to add or change rules
-2. **Add references**: Create new `.md` files in `references/`
-3. **Override defaults**: Update specific sections to match your team's preferences
-
-### Creating a Fork
+## Uninstall
 
 ```bash
-# Fork and clone
-git clone https://github.com/pillarliang/python-code-style.git
+/plugin uninstall python-code-style@productivity-toolkit
+/plugin uninstall text-to-diagrams@productivity-toolkit
 
-# Make your changes
-cd python-code-style
-# Edit files...
-
-# Install your customized version
-cp -r . ~/.claude/plugins/python-code-style
+# Or remove the whole marketplace (uninstalls all plugins from it)
+/plugin marketplace remove pillarliang/productivity-toolkit
 ```
+
+## Repo layout
+
+```text
+productivity-toolkit/
+├── .claude-plugin/
+│   └── marketplace.json              # Lists both plugins
+├── plugins/
+│   ├── python-code-style/
+│   │   ├── .claude-plugin/plugin.json
+│   │   └── skills/python-code-style/
+│   │       ├── SKILL.md
+│   │       └── references/           # docstrings, naming, language, style rules
+│   └── text-to-diagrams/
+│       ├── .claude-plugin/plugin.json
+│       └── skills/text-to-diagrams/
+│           ├── SKILL.md
+│           ├── README.md             # Skill-specific docs
+│           ├── templates/            # 17 diagram HTML templates
+│           ├── references/           # style.md, diagrams.md, page-shell.html
+│           ├── tools/svg-to-png.sh   # Optional SVG→PNG converter
+│           └── examples/             # Sample inputs + rendered outputs
+├── docs/                             # Multi-language READMEs
+├── LICENSE
+└── README.md                         # This file
+```
+
+> **Why this layout?** Each `plugins/<name>/` folder is a complete plugin in its own right (its own `plugin.json` and `skills/`). The top-level `marketplace.json` just enumerates them with `source` paths. Adding a third plugin = drop a new folder under `plugins/`, append one entry to `marketplace.json`. No coupling between plugins.
+
+## Adding a new plugin to this marketplace
+
+1. Create `plugins/<your-plugin>/.claude-plugin/plugin.json`
+2. Add `plugins/<your-plugin>/skills/<your-skill>/SKILL.md` (with frontmatter `name` + `description`)
+3. Add the supporting files the skill needs (references/, templates/, etc.)
+4. Append a new entry to `.claude-plugin/marketplace.json` `plugins[]` with `source: "./plugins/<your-plugin>"`
+5. Bump the marketplace `version` field
+
+That's it. No glue code, no registration step.
 
 ## Compatibility
 
 - **Claude Code**: v1.0.0+
-- **Cowork Mode**: Fully supported
-- **Python Versions**: Rules apply to Python 3.8+
-
-## Style Guide Sources
-
-This plugin is based on widely-adopted Python style conventions including:
-
-- [PEP 8 – Style Guide for Python Code](https://peps.python.org/pep-0008/)
-- [PEP 257 – Docstring Conventions](https://peps.python.org/pep-0257/)
-- [PEP 484 – Type Hints](https://peps.python.org/pep-0484/)
-- [Google python styleguide](https://google.github.io/styleguide/pyguide.html)
+- **Cowork mode**: fully supported
+- Each plugin's compatibility is documented in its own folder
 
 ## License
 
-This plugin is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+[MIT](LICENSE).
 
 ## Contributing
 
-Contributions are welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/improvement`)
-3. Commit your changes (`git commit -am 'Add new feature'`)
-4. Push to the branch (`git push origin feature/improvement`)
-5. Open a Pull Request
+1. Fork the repo
+2. Create a feature branch (`git checkout -b feature/<name>`)
+3. Either improve an existing plugin under `plugins/<name>/` or add a new one (see "Adding a new plugin" above)
+4. Open a PR
 
 ## Changelog
 
-### v1.1.0
+### v2.0.0
+
+- **Repo restructure**: renamed from `python-code-style` to `productivity-toolkit`; converted from single-plugin to multi-plugin marketplace
+- **New plugin**: `text-to-diagrams` — 17-type diagram generator (architecture, flow, sequence, ER, pyramid, donut, …) producing one HTML page + per-figure SVGs
+- `python-code-style` migrated to `plugins/python-code-style/` (no functional changes; install command updated to namespaced form)
+
+### v1.1.0 (python-code-style)
 
 - Added code review support with detailed feedback and scoring
-- Added code review checklist (naming, documentation, style, code quality)
-- Added standardized review output format
 - Added multi-language README support (10 languages)
-- Improved skill trigger conditions for better automatic activation
+- Improved skill trigger conditions
 
-### v1.0.0
+### v1.0.0 (python-code-style)
 
 - Initial release
-- Comprehensive Python style guide coverage
-- Naming conventions, docstrings, imports, formatting rules
-- Detailed reference documentation

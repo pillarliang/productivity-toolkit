@@ -1,0 +1,141 @@
+<svg viewBox="0 0 960 460" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="dots-tree" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.9" fill="rgba(20,20,19,0.08)"/>
+    </pattern>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#f5f4ed"/>
+  <rect width="100%" height="100%" fill="url(#dots-tree)" opacity="0.55"/>
+
+  <!-- ===== Root → branches connectors ===== -->
+  <line x1="480" y1="88" x2="480" y2="120" stroke="#504e49" stroke-width="1.2"/>
+  <line x1="120" y1="120" x2="768" y2="120" stroke="#504e49" stroke-width="1.2"/>
+
+  <!-- Root → Branch 1 (Framework) -->
+  <line x1="120" y1="120" x2="120" y2="152" stroke="#504e49" stroke-width="1.2"/>
+  <path d="M 115,148 L 120,152 L 125,148" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Root → Branch 2 (Business — FOCAL) -->
+  <line x1="336" y1="120" x2="336" y2="152" stroke="#1B365D" stroke-width="1.4"/>
+  <path d="M 331,148 L 336,152 L 341,148" fill="none" stroke="#1B365D" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Root → Branch 3 (Retrieval) -->
+  <line x1="552" y1="120" x2="552" y2="152" stroke="#504e49" stroke-width="1.2"/>
+  <path d="M 547,148 L 552,152 L 557,148" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Root → Branch 4 (Vertical) -->
+  <line x1="768" y1="120" x2="768" y2="152" stroke="#504e49" stroke-width="1.2"/>
+  <path d="M 763,148 L 768,152 L 773,148" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- ===== Branches → leaves ===== -->
+  <!-- Branch 1 → Leaf 1 (single) -->
+  <line x1="120" y1="200" x2="120" y2="288" stroke="#504e49" stroke-width="1.2"/>
+  <path d="M 115,284 L 120,288 L 125,284" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Branch 2 (focal) → Leaves 2 & 3 -->
+  <line x1="336" y1="200" x2="336" y2="244" stroke="#1B365D" stroke-width="1.4"/>
+  <line x1="264" y1="244" x2="408" y2="244" stroke="#1B365D" stroke-width="1.4"/>
+  <line x1="264" y1="244" x2="264" y2="288" stroke="#1B365D" stroke-width="1.4"/>
+  <line x1="408" y1="244" x2="408" y2="288" stroke="#1B365D" stroke-width="1.4"/>
+  <path d="M 259,284 L 264,288 L 269,284" fill="none" stroke="#1B365D" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 403,284 L 408,288 L 413,284" fill="none" stroke="#1B365D" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Branch 3 → Leaf 4 (single) -->
+  <line x1="552" y1="200" x2="552" y2="288" stroke="#504e49" stroke-width="1.2"/>
+  <path d="M 547,284 L 552,288 L 557,284" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Branch 4 → Leaves 5 & 6 -->
+  <line x1="768" y1="200" x2="768" y2="244" stroke="#504e49" stroke-width="1.2"/>
+  <line x1="696" y1="244" x2="840" y2="244" stroke="#504e49" stroke-width="1.2"/>
+  <line x1="696" y1="244" x2="696" y2="288" stroke="#504e49" stroke-width="1.2"/>
+  <line x1="840" y1="244" x2="840" y2="288" stroke="#504e49" stroke-width="1.2"/>
+  <path d="M 691,284 L 696,288 L 701,284" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 835,284 L 840,288 L 845,284" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- ===== Root ===== -->
+  <rect x="408" y="40" width="144" height="48" rx="6" fill="#f5f4ed"/>
+  <rect x="408" y="40" width="144" height="48" rx="6" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+  <text x="430" y="56" fill="#141413" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">PROJECT</text>
+  <text x="480" y="74" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">Agent 项目分工</text>
+
+  <!-- ===== Branches ===== -->
+
+  <!-- Branch 1: Framework -->
+  <rect x="56" y="152" width="128" height="48" rx="6" fill="#f5f4ed"/>
+  <rect x="56" y="152" width="128" height="48" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+  <text x="74" y="168" fill="#6b6a64" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">FRAMEWORK</text>
+  <text x="120" y="186" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">框架层</text>
+
+  <!-- Branch 2: Business (FOCAL) -->
+  <rect x="272" y="152" width="128" height="48" rx="6" fill="#f5f4ed"/>
+  <rect x="272" y="152" width="128" height="48" rx="6" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+  <text x="290" y="168" fill="#1B365D" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">FOCAL · BUSINESS</text>
+  <text x="336" y="186" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">业务能力</text>
+
+  <!-- Branch 3: Retrieval -->
+  <rect x="488" y="152" width="128" height="48" rx="6" fill="#f5f4ed"/>
+  <rect x="488" y="152" width="128" height="48" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+  <text x="506" y="168" fill="#6b6a64" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">RETRIEVAL</text>
+  <text x="552" y="186" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">检索</text>
+
+  <!-- Branch 4: Vertical -->
+  <rect x="704" y="152" width="128" height="48" rx="6" fill="#f5f4ed"/>
+  <rect x="704" y="152" width="128" height="48" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+  <text x="722" y="168" fill="#6b6a64" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">VERTICAL</text>
+  <text x="768" y="186" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">垂直领域调研</text>
+
+  <!-- ===== Leaves ===== -->
+
+  <!-- Leaf 1: 田丰团队 -->
+  <rect x="56" y="288" width="128" height="56" rx="6" fill="#f5f4ed"/>
+  <rect x="56" y="288" width="128" height="56" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+  <text x="120" y="308" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">田丰 团队</text>
+  <text x="120" y="324" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">master · worker</text>
+  <text x="120" y="336" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">task manager</text>
+
+  <!-- Leaf 2: 李振 (focal) -->
+  <rect x="200" y="288" width="128" height="56" rx="6" fill="#f5f4ed"/>
+  <rect x="200" y="288" width="128" height="56" rx="6" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+  <text x="264" y="308" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">李振</text>
+  <text x="264" y="324" fill="#1B365D" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">context · MD · ask</text>
+  <text x="264" y="336" fill="#1B365D" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">summary 平移</text>
+
+  <!-- Leaf 3: 许航 (focal) -->
+  <rect x="344" y="288" width="128" height="56" rx="6" fill="#f5f4ed"/>
+  <rect x="344" y="288" width="128" height="56" rx="6" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+  <text x="408" y="308" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">许航</text>
+  <text x="408" y="324" fill="#1B365D" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">context + memory</text>
+  <text x="408" y="336" fill="#1B365D" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">retrieval engine</text>
+
+  <!-- Leaf 4: 李坤 -->
+  <rect x="488" y="288" width="128" height="56" rx="6" fill="#f5f4ed"/>
+  <rect x="488" y="288" width="128" height="56" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+  <text x="552" y="308" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">李坤</text>
+  <text x="552" y="324" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">retrieval module</text>
+
+  <!-- Leaf 5: 满少晨 -->
+  <rect x="632" y="288" width="128" height="56" rx="6" fill="#f5f4ed"/>
+  <rect x="632" y="288" width="128" height="56" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+  <text x="696" y="308" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">满少晨</text>
+  <text x="696" y="324" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">legal vertical</text>
+
+  <!-- Leaf 6: Tony -->
+  <rect x="776" y="288" width="128" height="56" rx="6" fill="#f5f4ed"/>
+  <rect x="776" y="288" width="128" height="56" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+  <text x="840" y="308" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">Tony</text>
+  <text x="840" y="324" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">consulting vertical</text>
+
+  <!-- Legend -->
+  <line x1="40" y1="384" x2="920" y2="384" stroke="rgba(20,20,19,0.10)" stroke-width="0.8"/>
+  <text x="40" y="400" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" letter-spacing="0.22em">LEGEND</text>
+
+  <rect x="40" y="416" width="14" height="10" rx="2" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+  <text x="60" y="424" fill="#504e49" font-size="8.5" font-family="inherit">Focal · 业务能力 (李振 · 许航)</text>
+
+  <rect x="280" y="416" width="14" height="10" rx="2" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+  <text x="300" y="424" fill="#504e49" font-size="8.5" font-family="inherit">Project root</text>
+
+  <rect x="400" y="416" width="14" height="10" rx="2" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+  <text x="420" y="424" fill="#504e49" font-size="8.5" font-family="inherit">Secondary owner</text>
+</svg>

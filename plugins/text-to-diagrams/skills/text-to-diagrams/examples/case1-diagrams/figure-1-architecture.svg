@@ -1,0 +1,138 @@
+<svg viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="dots-arch" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.9" fill="rgba(20,20,19,0.08)"/>
+    </pattern>
+    <marker id="arrow-arch" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#504e49"/>
+    </marker>
+    <marker id="arrow-arch-brand" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1B365D"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#f5f4ed"/>
+  <rect width="100%" height="100%" fill="url(#dots-arch)" opacity="0.55"/>
+
+  <!-- ===== Arrows (drawn behind nodes) ===== -->
+  <!-- User -> Master Agent -->
+  <line x1="168" y1="80" x2="356" y2="80" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch)"/>
+  <!-- Master -> Worker (focal, primary path) -->
+  <line x1="500" y1="112" x2="500" y2="200" stroke="#1B365D" stroke-width="1.4" marker-end="url(#arrow-arch-brand)"/>
+  <!-- Master -> Vertical Agent -->
+  <path d="M 644 80 L 800 80 L 800 200" fill="none" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch)"/>
+  <!-- Worker -> Tools -->
+  <line x1="436" y1="280" x2="304" y2="320" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch)"/>
+  <!-- Worker -> Sub Agents -->
+  <line x1="564" y1="280" x2="696" y2="320" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch)"/>
+  <!-- Sandbox boundary surrounds Worker -->
+  <rect x="384" y="184" width="232" height="116" rx="8" fill="rgba(20,20,19,0.03)" stroke="rgba(20,20,19,0.30)" stroke-width="1" stroke-dasharray="4 3"/>
+  <!-- Worker <-> File System (recovery) -->
+  <line x1="616" y1="244" x2="744" y2="244" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch)"/>
+  <line x1="744" y1="252" x2="616" y2="252" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch)"/>
+  <!-- Context & Memory -> Master (read) -->
+  <line x1="124" y1="320" x2="124" y2="112" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch)"/>
+
+  <!-- Arrow labels -->
+  <rect x="216" y="68" width="44" height="14" rx="2" fill="#f5f4ed"/>
+  <text x="238" y="78" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.1em">QUERY</text>
+
+  <rect x="468" y="148" width="64" height="14" rx="2" fill="#f5f4ed"/>
+  <text x="500" y="158" fill="#1B365D" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.1em">DISPATCH</text>
+
+  <rect x="744" y="124" width="60" height="14" rx="2" fill="#f5f4ed"/>
+  <text x="774" y="134" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.1em">VERTICAL</text>
+
+  <rect x="624" y="240" width="112" height="14" rx="2" fill="#f5f4ed"/>
+  <text x="680" y="250" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.1em">CHECKPOINT</text>
+
+  <rect x="76" y="200" width="96" height="14" rx="2" fill="#f5f4ed"/>
+  <text x="124" y="210" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.1em">RETRIEVE</text>
+
+  <!-- Sandbox label -->
+  <rect x="396" y="176" width="64" height="14" rx="2" fill="#f5f4ed"/>
+  <text x="428" y="186" fill="#6b6a64" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.15em">SANDBOX</text>
+
+  <!-- ===== Nodes ===== -->
+
+  <!-- USER (external) -->
+  <rect x="40" y="48" width="128" height="64" rx="6" fill="#f5f4ed"/>
+  <rect x="40" y="48" width="128" height="64" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+  <text x="60" y="66" fill="#6b6a64" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">USER</text>
+  <text x="104" y="86" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">用户</text>
+  <text x="104" y="102" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">APP / Sigma</text>
+
+  <!-- Master Agent -->
+  <rect x="356" y="48" width="288" height="64" rx="6" fill="#f5f4ed"/>
+  <rect x="356" y="48" width="288" height="64" rx="6" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+  <text x="376" y="66" fill="#141413" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">MASTER</text>
+  <text x="500" y="86" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">Master Agent</text>
+  <text x="500" y="102" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">simple QA · intent · dispatch (no orchestration)</text>
+
+  <!-- Vertical Agent -->
+  <rect x="736" y="48" width="128" height="64" rx="6" fill="#f5f4ed"/>
+  <rect x="736" y="48" width="128" height="64" rx="6" fill="rgba(20,20,19,0.03)" stroke="rgba(20,20,19,0.30)" stroke-width="1"/>
+  <text x="756" y="66" fill="#6b6a64" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">SPECIALIZED</text>
+  <text x="800" y="86" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">Vertical Agent</text>
+  <text x="800" y="102" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">legal · consulting</text>
+
+  <!-- Worker Agent (FOCAL) -->
+  <rect x="396" y="200" width="208" height="80" rx="6" fill="#f5f4ed"/>
+  <rect x="396" y="200" width="208" height="80" rx="6" fill="#EEF2F7" stroke="#1B365D" stroke-width="1.2"/>
+  <text x="416" y="220" fill="#1B365D" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">WORKER · FOCAL</text>
+  <text x="500" y="244" fill="#141413" font-size="13" font-weight="600" font-family="inherit" text-anchor="middle">Worker Agent</text>
+  <text x="500" y="262" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">complex business · tool calls</text>
+
+  <!-- File System (within sandbox row, right of worker) -->
+  <rect x="744" y="216" width="128" height="56" rx="6" fill="#f5f4ed"/>
+  <rect x="744" y="216" width="128" height="56" rx="6" fill="rgba(20,20,19,0.05)" stroke="#504e49" stroke-width="1"/>
+  <text x="760" y="232" fill="#504e49" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">STORE</text>
+  <text x="808" y="250" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">File System</text>
+  <text x="808" y="264" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">recovery · MD</text>
+
+  <!-- Context & Memory (left of worker) -->
+  <rect x="60" y="320" width="128" height="56" rx="6" fill="#f5f4ed"/>
+  <rect x="60" y="320" width="128" height="56" rx="6" fill="rgba(20,20,19,0.05)" stroke="#504e49" stroke-width="1"/>
+  <text x="76" y="336" fill="#504e49" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">INDEX</text>
+  <text x="124" y="354" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">Context + Memory</text>
+  <text x="124" y="368" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">outline · overview</text>
+
+  <!-- Tools -->
+  <rect x="232" y="320" width="128" height="56" rx="6" fill="#f5f4ed"/>
+  <rect x="232" y="320" width="128" height="56" rx="6" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+  <text x="248" y="336" fill="#141413" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">TOOLS</text>
+  <text x="296" y="354" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">Plaud Tools</text>
+  <text x="296" y="368" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">web search · skill</text>
+
+  <!-- Sub Agents -->
+  <rect x="640" y="320" width="128" height="56" rx="6" fill="#f5f4ed"/>
+  <rect x="640" y="320" width="128" height="56" rx="6" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+  <text x="656" y="336" fill="#141413" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">SUB-AGENT</text>
+  <text x="704" y="354" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">Sub Agents</text>
+  <text x="704" y="368" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">delegated tasks</text>
+
+  <!-- Legend -->
+  <line x1="40" y1="408" x2="920" y2="408" stroke="rgba(20,20,19,0.10)" stroke-width="0.8"/>
+  <text x="40" y="424" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" letter-spacing="0.22em">LEGEND</text>
+
+  <rect x="40" y="440" width="14" height="10" rx="2" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+  <text x="60" y="448" fill="#504e49" font-size="8.5" font-family="inherit">Focal · Worker Agent</text>
+
+  <rect x="200" y="440" width="14" height="10" rx="2" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+  <text x="220" y="448" fill="#504e49" font-size="8.5" font-family="inherit">Service node</text>
+
+  <rect x="320" y="440" width="14" height="10" rx="2" fill="rgba(20,20,19,0.05)" stroke="#504e49" stroke-width="1"/>
+  <text x="340" y="448" fill="#504e49" font-size="8.5" font-family="inherit">Store</text>
+
+  <rect x="400" y="440" width="14" height="10" rx="2" fill="rgba(20,20,19,0.03)" stroke="rgba(20,20,19,0.30)" stroke-width="1" stroke-dasharray="3 2"/>
+  <text x="420" y="448" fill="#504e49" font-size="8.5" font-family="inherit">Sandbox · cloud</text>
+
+  <rect x="520" y="440" width="14" height="10" rx="2" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+  <text x="540" y="448" fill="#504e49" font-size="8.5" font-family="inherit">External</text>
+
+  <line x1="640" y1="446" x2="670" y2="446" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch)"/>
+  <text x="678" y="448" fill="#504e49" font-size="8.5" font-family="inherit">Standard flow</text>
+
+  <line x1="800" y1="446" x2="830" y2="446" stroke="#1B365D" stroke-width="1.4" marker-end="url(#arrow-arch-brand)"/>
+  <text x="838" y="448" fill="#504e49" font-size="8.5" font-family="inherit">Primary path</text>
+</svg>

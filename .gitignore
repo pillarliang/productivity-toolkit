@@ -1,0 +1,8 @@
+# Editor
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Generated outputs
+*.log

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="text-to-diagrams">
+<title>新 Agent 架构会议 · 配图三幅</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment:  #f5f4ed;
+    --ivory:      #faf9f5;
+    --near-black: #141413;
+    --olive:      #504e49;
+    --stone:      #6b6a64;
+    --brand:      #1B365D;
+    --brand-tint: #EEF2F7;
+    --border:     #e8e6dc;
+
+    --serif: Charter, Georgia, Palatino, "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", serif;
+    --sans:  var(--serif);
+    --mono:  "JetBrains Mono", "SF Mono", Consolas, "TsangerJinKai02", "Source Han Serif SC", monospace;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--parchment);
+    color: var(--near-black);
+    padding: 4rem 2rem;
+    line-height: 1.5;
+  }
+
+  .page { max-width: 1040px; margin: 0 auto; }
+
+  .page-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 0.5rem;
+  }
+
+  .page-title {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: -0.4pt;
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+
+  .page-rationale {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--olive);
+    max-width: 64ch;
+    margin-bottom: 3.2rem;
+  }
+
+  .diagram-block {
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .diagram-block:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .diagram-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 0.4rem;
+  }
+
+  .diagram-title {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.2pt;
+    line-height: 1.2;
+    margin-bottom: 1.4rem;
+  }
+
+  .diagram-block svg { width: 100%; display: block; margin-bottom: 1rem; }
+
+  .diagram-caption {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--olive);
+    max-width: 56ch;
+  }
+
+  .colophon {
+    margin-top: 4rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <p class="page-eyebrow">Diagrams · 3 figures</p>
+    <h1 class="page-title">新 Agent 架构会议 · 配图三幅</h1>
+    <p class="page-rationale">会议纪要里有三层结构需要图示：系统拆分（Master / Worker / Sandbox）、人员分工、定制决策。每张图各承担一个问题，焦点全部落在 Worker 与业务能力——这是会议重申最多的复杂度所在。</p>
+
+    <!-- ===== Figure 1 · Architecture ===== -->
+    <section class="diagram-block">
+      <p class="diagram-eyebrow">Figure 1 · Architecture</p>
+      <h2 class="diagram-title">Agent 系统分层 · Master 调度，Worker 在 Sandbox 内承业务</h2>
+
+      <svg viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="dots-arch-pg" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.9" fill="rgba(20,20,19,0.08)"/>
+          </pattern>
+          <marker id="arrow-arch-pg" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#504e49"/>
+          </marker>
+          <marker id="arrow-arch-brand-pg" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#1B365D"/>
+          </marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f4ed"/>
+        <rect width="100%" height="100%" fill="url(#dots-arch-pg)" opacity="0.55"/>
+
+        <line x1="168" y1="80" x2="356" y2="80" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch-pg)"/>
+        <line x1="500" y1="112" x2="500" y2="200" stroke="#1B365D" stroke-width="1.4" marker-end="url(#arrow-arch-brand-pg)"/>
+        <path d="M 644 80 L 800 80 L 800 200" fill="none" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch-pg)"/>
+        <line x1="436" y1="280" x2="304" y2="320" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch-pg)"/>
+        <line x1="564" y1="280" x2="696" y2="320" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch-pg)"/>
+        <rect x="384" y="184" width="232" height="116" rx="8" fill="rgba(20,20,19,0.03)" stroke="rgba(20,20,19,0.30)" stroke-width="1" stroke-dasharray="4 3"/>
+        <line x1="616" y1="244" x2="744" y2="244" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch-pg)"/>
+        <line x1="744" y1="252" x2="616" y2="252" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch-pg)"/>
+        <line x1="124" y1="320" x2="124" y2="112" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch-pg)"/>
+
+        <rect x="216" y="68" width="44" height="14" rx="2" fill="#f5f4ed"/>
+        <text x="238" y="78" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.1em">QUERY</text>
+
+        <rect x="468" y="148" width="64" height="14" rx="2" fill="#f5f4ed"/>
+        <text x="500" y="158" fill="#1B365D" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.1em">DISPATCH</text>
+
+        <rect x="744" y="124" width="60" height="14" rx="2" fill="#f5f4ed"/>
+        <text x="774" y="134" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.1em">VERTICAL</text>
+
+        <rect x="624" y="240" width="112" height="14" rx="2" fill="#f5f4ed"/>
+        <text x="680" y="250" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.1em">CHECKPOINT</text>
+
+        <rect x="76" y="200" width="96" height="14" rx="2" fill="#f5f4ed"/>
+        <text x="124" y="210" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.1em">RETRIEVE</text>
+
+        <rect x="396" y="176" width="64" height="14" rx="2" fill="#f5f4ed"/>
+        <text x="428" y="186" fill="#6b6a64" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.15em">SANDBOX</text>
+
+        <!-- USER -->
+        <rect x="40" y="48" width="128" height="64" rx="6" fill="#f5f4ed"/>
+        <rect x="40" y="48" width="128" height="64" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+        <text x="60" y="66" fill="#6b6a64" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">USER</text>
+        <text x="104" y="86" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">用户</text>
+        <text x="104" y="102" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">APP / Sigma</text>
+
+        <!-- Master -->
+        <rect x="356" y="48" width="288" height="64" rx="6" fill="#f5f4ed"/>
+        <rect x="356" y="48" width="288" height="64" rx="6" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+        <text x="376" y="66" fill="#141413" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">MASTER</text>
+        <text x="500" y="86" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">Master Agent</text>
+        <text x="500" y="102" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">simple QA · intent · dispatch (no orchestration)</text>
+
+        <!-- Vertical Agent -->
+        <rect x="736" y="48" width="128" height="64" rx="6" fill="#f5f4ed"/>
+        <rect x="736" y="48" width="128" height="64" rx="6" fill="rgba(20,20,19,0.03)" stroke="rgba(20,20,19,0.30)" stroke-width="1"/>
+        <text x="756" y="66" fill="#6b6a64" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">SPECIALIZED</text>
+        <text x="800" y="86" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">Vertical Agent</text>
+        <text x="800" y="102" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">legal · consulting</text>
+
+        <!-- Worker (FOCAL) -->
+        <rect x="396" y="200" width="208" height="80" rx="6" fill="#f5f4ed"/>
+        <rect x="396" y="200" width="208" height="80" rx="6" fill="#EEF2F7" stroke="#1B365D" stroke-width="1.2"/>
+        <text x="416" y="220" fill="#1B365D" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">WORKER · FOCAL</text>
+        <text x="500" y="244" fill="#141413" font-size="13" font-weight="600" font-family="inherit" text-anchor="middle">Worker Agent</text>
+        <text x="500" y="262" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">complex business · tool calls</text>
+
+        <!-- File System -->
+        <rect x="744" y="216" width="128" height="56" rx="6" fill="#f5f4ed"/>
+        <rect x="744" y="216" width="128" height="56" rx="6" fill="rgba(20,20,19,0.05)" stroke="#504e49" stroke-width="1"/>
+        <text x="760" y="232" fill="#504e49" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">STORE</text>
+        <text x="808" y="250" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">File System</text>
+        <text x="808" y="264" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">recovery · MD</text>
+
+        <!-- Context + Memory -->
+        <rect x="60" y="320" width="128" height="56" rx="6" fill="#f5f4ed"/>
+        <rect x="60" y="320" width="128" height="56" rx="6" fill="rgba(20,20,19,0.05)" stroke="#504e49" stroke-width="1"/>
+        <text x="76" y="336" fill="#504e49" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">INDEX</text>
+        <text x="124" y="354" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">Context + Memory</text>
+        <text x="124" y="368" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">outline · overview</text>
+
+        <!-- Tools -->
+        <rect x="232" y="320" width="128" height="56" rx="6" fill="#f5f4ed"/>
+        <rect x="232" y="320" width="128" height="56" rx="6" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+        <text x="248" y="336" fill="#141413" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">TOOLS</text>
+        <text x="296" y="354" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">Plaud Tools</text>
+        <text x="296" y="368" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">web search · skill</text>
+
+        <!-- Sub Agents -->
+        <rect x="640" y="320" width="128" height="56" rx="6" fill="#f5f4ed"/>
+        <rect x="640" y="320" width="128" height="56" rx="6" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+        <text x="656" y="336" fill="#141413" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">SUB-AGENT</text>
+        <text x="704" y="354" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">Sub Agents</text>
+        <text x="704" y="368" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">delegated tasks</text>
+
+        <!-- Legend -->
+        <line x1="40" y1="408" x2="920" y2="408" stroke="rgba(20,20,19,0.10)" stroke-width="0.8"/>
+        <text x="40" y="424" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" letter-spacing="0.22em">LEGEND</text>
+
+        <rect x="40" y="440" width="14" height="10" rx="2" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+        <text x="60" y="448" fill="#504e49" font-size="8.5" font-family="inherit">Focal · Worker Agent</text>
+
+        <rect x="200" y="440" width="14" height="10" rx="2" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+        <text x="220" y="448" fill="#504e49" font-size="8.5" font-family="inherit">Service node</text>
+
+        <rect x="320" y="440" width="14" height="10" rx="2" fill="rgba(20,20,19,0.05)" stroke="#504e49" stroke-width="1"/>
+        <text x="340" y="448" fill="#504e49" font-size="8.5" font-family="inherit">Store</text>
+
+        <rect x="400" y="440" width="14" height="10" rx="2" fill="rgba(20,20,19,0.03)" stroke="rgba(20,20,19,0.30)" stroke-width="1" stroke-dasharray="3 2"/>
+        <text x="420" y="448" fill="#504e49" font-size="8.5" font-family="inherit">Sandbox · cloud</text>
+
+        <rect x="520" y="440" width="14" height="10" rx="2" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+        <text x="540" y="448" fill="#504e49" font-size="8.5" font-family="inherit">External</text>
+
+        <line x1="640" y1="446" x2="670" y2="446" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-arch-pg)"/>
+        <text x="678" y="448" fill="#504e49" font-size="8.5" font-family="inherit">Standard flow</text>
+
+        <line x1="800" y1="446" x2="830" y2="446" stroke="#1B365D" stroke-width="1.4" marker-end="url(#arrow-arch-brand-pg)"/>
+        <text x="838" y="448" fill="#504e49" font-size="8.5" font-family="inherit">Primary path</text>
+      </svg>
+
+      <p class="diagram-caption">Worker Agent 是焦点——会议明确"所有复杂业务都在 worker"。Master 只做 QA 与分发，Sandbox 提供文件系统与恢复能力，Vertical Agent 是为法律 / 咨询场景留的扩展位。</p>
+    </section>
+
+    <!-- ===== Figure 2 · Tree ===== -->
+    <section class="diagram-block">
+      <p class="diagram-eyebrow">Figure 2 · Tree</p>
+      <h2 class="diagram-title">分工地图 · 框架、业务、检索、垂直四条线</h2>
+
+      <svg viewBox="0 0 960 460" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="dots-tree-pg" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.9" fill="rgba(20,20,19,0.08)"/>
+          </pattern>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f4ed"/>
+        <rect width="100%" height="100%" fill="url(#dots-tree-pg)" opacity="0.55"/>
+
+        <!-- Root → branches -->
+        <line x1="480" y1="88" x2="480" y2="120" stroke="#504e49" stroke-width="1.2"/>
+        <line x1="120" y1="120" x2="768" y2="120" stroke="#504e49" stroke-width="1.2"/>
+
+        <line x1="120" y1="120" x2="120" y2="152" stroke="#504e49" stroke-width="1.2"/>
+        <path d="M 115,148 L 120,152 L 125,148" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+
+        <line x1="336" y1="120" x2="336" y2="152" stroke="#1B365D" stroke-width="1.4"/>
+        <path d="M 331,148 L 336,152 L 341,148" fill="none" stroke="#1B365D" stroke-width="1.5" stroke-linecap="round"/>
+
+        <line x1="552" y1="120" x2="552" y2="152" stroke="#504e49" stroke-width="1.2"/>
+        <path d="M 547,148 L 552,152 L 557,148" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+
+        <line x1="768" y1="120" x2="768" y2="152" stroke="#504e49" stroke-width="1.2"/>
+        <path d="M 763,148 L 768,152 L 773,148" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+
+        <!-- Branches → leaves -->
+        <line x1="120" y1="200" x2="120" y2="288" stroke="#504e49" stroke-width="1.2"/>
+        <path d="M 115,284 L 120,288 L 125,284" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+
+        <line x1="336" y1="200" x2="336" y2="244" stroke="#1B365D" stroke-width="1.4"/>
+        <line x1="264" y1="244" x2="408" y2="244" stroke="#1B365D" stroke-width="1.4"/>
+        <line x1="264" y1="244" x2="264" y2="288" stroke="#1B365D" stroke-width="1.4"/>
+        <line x1="408" y1="244" x2="408" y2="288" stroke="#1B365D" stroke-width="1.4"/>
+        <path d="M 259,284 L 264,288 L 269,284" fill="none" stroke="#1B365D" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M 403,284 L 408,288 L 413,284" fill="none" stroke="#1B365D" stroke-width="1.5" stroke-linecap="round"/>
+
+        <line x1="552" y1="200" x2="552" y2="288" stroke="#504e49" stroke-width="1.2"/>
+        <path d="M 547,284 L 552,288 L 557,284" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+
+        <line x1="768" y1="200" x2="768" y2="244" stroke="#504e49" stroke-width="1.2"/>
+        <line x1="696" y1="244" x2="840" y2="244" stroke="#504e49" stroke-width="1.2"/>
+        <line x1="696" y1="244" x2="696" y2="288" stroke="#504e49" stroke-width="1.2"/>
+        <line x1="840" y1="244" x2="840" y2="288" stroke="#504e49" stroke-width="1.2"/>
+        <path d="M 691,284 L 696,288 L 701,284" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M 835,284 L 840,288 L 845,284" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round"/>
+
+        <!-- Root -->
+        <rect x="408" y="40" width="144" height="48" rx="6" fill="#f5f4ed"/>
+        <rect x="408" y="40" width="144" height="48" rx="6" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+        <text x="430" y="56" fill="#141413" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">PROJECT</text>
+        <text x="480" y="74" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">Agent 项目分工</text>
+
+        <!-- Branches -->
+        <rect x="56" y="152" width="128" height="48" rx="6" fill="#f5f4ed"/>
+        <rect x="56" y="152" width="128" height="48" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+        <text x="74" y="168" fill="#6b6a64" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">FRAMEWORK</text>
+        <text x="120" y="186" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">框架层</text>
+
+        <rect x="272" y="152" width="128" height="48" rx="6" fill="#f5f4ed"/>
+        <rect x="272" y="152" width="128" height="48" rx="6" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+        <text x="290" y="168" fill="#1B365D" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">FOCAL · BUSINESS</text>
+        <text x="336" y="186" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">业务能力</text>
+
+        <rect x="488" y="152" width="128" height="48" rx="6" fill="#f5f4ed"/>
+        <rect x="488" y="152" width="128" height="48" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+        <text x="506" y="168" fill="#6b6a64" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">RETRIEVAL</text>
+        <text x="552" y="186" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">检索</text>
+
+        <rect x="704" y="152" width="128" height="48" rx="6" fill="#f5f4ed"/>
+        <rect x="704" y="152" width="128" height="48" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+        <text x="722" y="168" fill="#6b6a64" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">VERTICAL</text>
+        <text x="768" y="186" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">垂直领域调研</text>
+
+        <!-- Leaves -->
+        <rect x="56" y="288" width="128" height="56" rx="6" fill="#f5f4ed"/>
+        <rect x="56" y="288" width="128" height="56" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+        <text x="120" y="308" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">田丰 团队</text>
+        <text x="120" y="324" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">master · worker</text>
+        <text x="120" y="336" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">task manager</text>
+
+        <rect x="200" y="288" width="128" height="56" rx="6" fill="#f5f4ed"/>
+        <rect x="200" y="288" width="128" height="56" rx="6" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+        <text x="264" y="308" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">李振</text>
+        <text x="264" y="324" fill="#1B365D" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">context · MD · ask</text>
+        <text x="264" y="336" fill="#1B365D" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">summary 平移</text>
+
+        <rect x="344" y="288" width="128" height="56" rx="6" fill="#f5f4ed"/>
+        <rect x="344" y="288" width="128" height="56" rx="6" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+        <text x="408" y="308" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">许航</text>
+        <text x="408" y="324" fill="#1B365D" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">context + memory</text>
+        <text x="408" y="336" fill="#1B365D" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">retrieval engine</text>
+
+        <rect x="488" y="288" width="128" height="56" rx="6" fill="#f5f4ed"/>
+        <rect x="488" y="288" width="128" height="56" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+        <text x="552" y="308" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">李坤</text>
+        <text x="552" y="324" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">retrieval module</text>
+
+        <rect x="632" y="288" width="128" height="56" rx="6" fill="#f5f4ed"/>
+        <rect x="632" y="288" width="128" height="56" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+        <text x="696" y="308" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">满少晨</text>
+        <text x="696" y="324" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">legal vertical</text>
+
+        <rect x="776" y="288" width="128" height="56" rx="6" fill="#f5f4ed"/>
+        <rect x="776" y="288" width="128" height="56" rx="6" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+        <text x="840" y="308" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">Tony</text>
+        <text x="840" y="324" fill="#504e49" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">consulting vertical</text>
+
+        <line x1="40" y1="384" x2="920" y2="384" stroke="rgba(20,20,19,0.10)" stroke-width="0.8"/>
+        <text x="40" y="400" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" letter-spacing="0.22em">LEGEND</text>
+
+        <rect x="40" y="416" width="14" height="10" rx="2" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+        <text x="60" y="424" fill="#504e49" font-size="8.5" font-family="inherit">Focal · 业务能力 (李振 · 许航)</text>
+
+        <rect x="280" y="416" width="14" height="10" rx="2" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+        <text x="300" y="424" fill="#504e49" font-size="8.5" font-family="inherit">Project root</text>
+
+        <rect x="400" y="416" width="14" height="10" rx="2" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+        <text x="420" y="424" fill="#504e49" font-size="8.5" font-family="inherit">Secondary owner</text>
+      </svg>
+
+      <p class="diagram-caption">业务能力分支着色——李振、许航承担 context、memory、ask 平移这条最重链路。其他三条分支（框架、检索、垂直）单点收口，便于管理者一眼看到团队负载分布。</p>
+    </section>
+
+    <!-- ===== Figure 3 · Flowchart ===== -->
+    <section class="diagram-block">
+      <p class="diagram-eyebrow">Figure 3 · Flowchart</p>
+      <h2 class="diagram-title">是否定制 Worker Agent？— 单一判断点</h2>
+
+      <svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrow-flow-pg" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#504e49"/>
+          </marker>
+          <marker id="arrow-flow-brand-pg" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#1B365D"/>
+          </marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f4ed"/>
+
+        <line x1="430" y1="72" x2="430" y2="112" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-flow-pg)"/>
+        <line x1="430" y1="176" x2="430" y2="216" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-flow-pg)"/>
+
+        <path d="M 360 268 L 200 268 L 200 332" fill="none" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-flow-pg)"/>
+        <rect x="170" y="284" width="34" height="14" rx="2" fill="#f5f4ed"/>
+        <text x="187" y="294" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.12em">YES</text>
+
+        <path d="M 500 268 L 660 268 L 660 332" fill="none" stroke="#1B365D" stroke-width="1.4" marker-end="url(#arrow-flow-brand-pg)"/>
+        <rect x="636" y="284" width="30" height="14" rx="2" fill="#f5f4ed"/>
+        <text x="651" y="294" fill="#1B365D" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.12em">NO</text>
+
+        <path d="M 200 396 L 200 440 L 396 440" fill="none" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow-flow-pg)"/>
+        <path d="M 660 396 L 660 440 L 464 440" fill="none" stroke="#1B365D" stroke-width="1.4" marker-end="url(#arrow-flow-brand-pg)"/>
+
+        <rect x="340" y="40" width="180" height="32" rx="16" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+        <text x="430" y="60" fill="#141413" font-size="11" font-family="inherit" text-anchor="middle">新场景需求到达</text>
+
+        <rect x="350" y="112" width="160" height="64" rx="6" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+        <text x="364" y="130" fill="#504e49" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">STEP 01</text>
+        <text x="430" y="150" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">列出所需 service / tools</text>
+        <text x="430" y="166" fill="#504e49" font-size="9" font-family="inherit" text-anchor="middle">梳理工具与编排需求</text>
+
+        <polygon points="430,216 500,242 500,268 430,320 360,268 360,242"
+                 fill="#EEF2F7" stroke="#1B365D" stroke-width="1.2"/>
+        <text x="430" y="260" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">模型能自主调用 tools</text>
+        <text x="430" y="275" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle">且无需编排链路？</text>
+        <text x="430" y="294" fill="#1B365D" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.15em">DECISION</text>
+
+        <rect x="120" y="332" width="160" height="64" rx="6" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+        <text x="134" y="350" fill="#504e49" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">OUTCOME A</text>
+        <text x="200" y="370" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">原生 Worker + Tools</text>
+        <text x="200" y="386" fill="#504e49" font-size="9" font-family="inherit" text-anchor="middle">不定制 · 沿用框架</text>
+
+        <rect x="580" y="332" width="160" height="64" rx="6" fill="#EEF2F7" stroke="#1B365D" stroke-width="1.2"/>
+        <text x="594" y="350" fill="#1B365D" font-size="7" font-family="'JetBrains Mono', monospace" letter-spacing="0.15em">OUTCOME B · FOCAL</text>
+        <text x="660" y="370" fill="#141413" font-size="12" font-weight="600" font-family="inherit" text-anchor="middle">定制 Worker Agent</text>
+        <text x="660" y="386" fill="#1B365D" font-size="9" font-family="inherit" text-anchor="middle">优先质量 · 后续降本</text>
+
+        <rect x="340" y="424" width="180" height="32" rx="16" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+        <text x="430" y="444" fill="#141413" font-size="11" font-family="inherit" text-anchor="middle">交付到 Master Agent</text>
+
+        <line x1="40" y1="484" x2="820" y2="484" stroke="rgba(20,20,19,0.10)" stroke-width="0.8"/>
+        <text x="40" y="500" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" letter-spacing="0.22em">LEGEND</text>
+
+        <polygon points="180,492 192,498 180,504 168,498" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+        <text x="202" y="502" fill="#504e49" font-size="8.5" font-family="inherit">Focal · decision &amp; primary path</text>
+
+        <rect x="400" y="494" width="14" height="10" rx="2" fill="#ffffff" stroke="#141413" stroke-width="1"/>
+        <text x="420" y="502" fill="#504e49" font-size="8.5" font-family="inherit">Step · outcome</text>
+
+        <rect x="540" y="494" width="14" height="10" rx="16" fill="rgba(94,93,89,0.08)" stroke="#6b6a64" stroke-width="1"/>
+        <text x="560" y="502" fill="#504e49" font-size="8.5" font-family="inherit">Start · end</text>
+
+        <line x1="660" y1="500" x2="690" y2="500" stroke="#1B365D" stroke-width="1.4" marker-end="url(#arrow-flow-brand-pg)"/>
+        <text x="698" y="502" fill="#504e49" font-size="8.5" font-family="inherit">Customize path</text>
+      </svg>
+
+      <p class="diagram-caption">焦点放在判断框与"定制"分支——会议结论是"质量优先于成本"，所以"NO → 定制"路径用主色突出。"YES → 原生"是更省力但能力受限的退路。</p>
+    </section>
+
+    <p class="colophon">Generated by text-to-diagrams · kami palette</p>
+  </main>
+</body>
+</html>

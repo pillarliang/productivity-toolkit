@@ -1,0 +1,22 @@
+{
+  "name": "text-to-diagrams",
+  "description": "Turn raw text into one HTML page of diagrams plus standalone SVGs. Picks from 17 diagram types (architecture, flowchart, sequence, ER, pyramid, donut, line/bar chart, swimlane, tree, layer-stack, venn, candlestick, waterfall, quadrant, state-machine, timeline) and emits a kami-style page.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Pillar Liang",
+    "email": "pillarliang21@gmail.com"
+  },
+  "homepage": "https://github.com/pillarliang/productivity-toolkit",
+  "license": "MIT",
+  "keywords": [
+    "diagrams",
+    "svg",
+    "visualization",
+    "kami",
+    "documentation",
+    "text-to-diagram",
+    "architecture-diagram",
+    "flowchart"
+  ],
+  "skills": ["./skills/"]
+}

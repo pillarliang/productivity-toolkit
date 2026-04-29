@@ -1,8 +1,8 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "python-code-style",
-  "version": "1.0.0",
-  "description": "A collection of Python code style plugins for Claude Code",
+  "name": "productivity-toolkit",
+  "version": "2.0.0",
+  "description": "A productivity toolkit for Claude Code. Bundles two plugins — python-code-style (Python style enforcement & review) and text-to-diagrams (turn text into diagram pages). Install plugins individually via /plugin install.",
   "owner": {
     "name": "Pillar Liang",
     "email": "pillarliang21@gmail.com"
@@ -10,15 +10,27 @@
   "plugins": [
     {
       "name": "python-code-style",
-      "description": "Enforce professional Python style guidelines for all Python code generation. Includes comprehensive naming conventions, docstring formats (Args/Returns/Raises), import rules, formatting standards, and industry best practices.",
+      "description": "Enforce professional Python style guidelines for code generation and review. Includes naming conventions, docstring formats (Args/Returns/Raises), import rules, formatting standards, code review checklist, and industry best practices.",
+      "version": "1.0.1",
+      "author": {
+        "name": "Pillar Liang",
+        "email": "pillarliang21@gmail.com"
+      },
+      "source": "./plugins/python-code-style",
+      "category": "development",
+      "tags": ["python", "style-guide", "code-quality", "linting", "formatting", "pep8"]
+    },
+    {
+      "name": "text-to-diagrams",
+      "description": "Turn raw text into one HTML page of diagrams (architecture, flowchart, sequence, ER, pyramid, donut, line/bar chart, swimlane, tree, layer-stack, venn, candlestick, waterfall, quadrant, state-machine, timeline) plus standalone SVGs. 17 diagram types, kami-style.",
       "version": "1.0.0",
       "author": {
         "name": "Pillar Liang",
         "email": "pillarliang21@gmail.com"
       },
-      "source": "./",
-      "category": "development",
-      "tags": ["python", "style-guide", "code-quality", "linting", "formatting"]
+      "source": "./plugins/text-to-diagrams",
+      "category": "documentation",
+      "tags": ["diagrams", "svg", "visualization", "documentation", "kami"]
     }
   ]
 }

@@ -1,0 +1,13 @@
+Q1 2026 Platform Review
+
+The platform shipped four major releases this quarter. Each release moved a distinct part of the stack: Q1.1 reworked the request router, Q1.2 added a vector cache between the API and the embedding service, Q1.3 rewrote the billing pipeline, and Q1.4 introduced a new admin console.
+
+Architecture-wise, requests now flow: User → CDN (edge cache + SSL termination) → API gateway → Application server → either the vector cache (for AI features) or the relational database (for everything else). The application server is the focal piece — it owns routing, auth, and tenant resolution. The vector cache is new this quarter and is a Redis cluster with custom embeddings stored as binary blobs.
+
+Revenue split for Q1: subscriptions 62%, usage-based billing 24%, professional services 9%, marketplace fees 5%. This is the first quarter usage-based billing crossed 20%, driven by the AI feature rollout in Q1.2.
+
+Monthly active users grew from 41,200 in January to 47,800 in February to 53,500 in March. The growth in February tracks the launch of the admin console; March growth tracks the AI features going GA.
+
+For Q2 priorities we evaluated 9 candidate projects on impact and effort. High impact / low effort: SSO support, audit log retention, and webhook reliability. High impact / high effort: multi-region deployment, custom model fine-tuning. Low impact / high effort (do not pick): a complete UI redesign and a homegrown analytics warehouse.
+
+The deploy process now runs as: Engineer pushes to feature branch → CI runs tests + builds artifact → review approval gate → staging deploy → smoke tests → production canary (5% traffic) → full rollout. The canary stage was added in Q1.4 after a Q4 incident.
